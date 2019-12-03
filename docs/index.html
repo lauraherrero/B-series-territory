@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+    
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Adalab Web Starter Kit</title>
+        <link rel="icon" href="./favicon.png" />
+        <link rel="stylesheet" href="./assets/css/main.css" />
+    </head>
+    
+    <body>
+        <section class="searchSection">
+             <h2 class="searchSection__title">Buscador de series</h2>
+
+            <form action="" method="POST" class="form" id="form">
+                <input type="text" id="inputSearch" class="form__input">
+                <button type="button" id="buttonSearch" class="form__button">Search</button>
+            </form>
+        </section>
+        <main class="main">
+            <section class="favourites">
+                 <h3 class="favourites__title">Mis series favoritas</h3>
+
+                <div class="favourites__container" id="favouritesContainer">
+                    <ul class="favourites__container--list" id="favouriteList"></ul>
+                </div>
+            </section>
+            <section class="allSeries">
+                <div class="allSeries__container" id="seriesContainer"></div>
+            </section>
+        </main>
+        <script type="text/javascript" src="../assets/js/main.js"></script>
+    </body>
+
+</html>
