@@ -63,8 +63,6 @@ const paintSeries = (dataSearch) => {
   };
 };
 
-
-
 //Función para añadir o quitar el fondo de la serie cuando hago click en el div
 function clickFavourite (event) {
   const selectSerie = event.currentTarget;
