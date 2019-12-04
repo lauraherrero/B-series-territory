@@ -7,6 +7,8 @@ const elementContainer = document.querySelector('#seriesContainer');
 const elementFavouriteList = document.querySelector('#favouriteList');
 const elementFavouriteContainer = document.querySelector('#favouritesContainer');
 const elementForm = document.querySelector('#form');
+const elementButtonLog = document.querySelector('#btnLog');
+let series;
 
 //Meto mi url en una constante
 const urlBase = 'http://api.tvmaze.com/search/shows?q=';
@@ -18,7 +20,10 @@ const connectToApi = () => {
 const inputValue = elementInputSearch.value.toLowerCase();
   fetch(urlBase + inputValue)
   .then(response => response.json())
-  .then(dataSearch => paintSeries(dataSearch))
+  .then(dataSearch => {
+    series = dataSearch;
+    paintSeries(dataSearch);
+  })
 };
 
 //Compruebo si mi localStorage está vacío. Si no lo está, le digo que lo parsee, sino le digo que ejecute la función de conectarse a la API
@@ -38,10 +43,13 @@ const paintSeries = (dataSearch) => {
   for (let i = 0; i < dataSearch.length; i++) {
     const serieName = dataSearch[i].show.name;
     const serieImage = dataSearch[i].show.image;
+    const serieHour = dataSearch[i].show.schedule.time;
     const elementDiv = document.createElement ('div');
     const elementImg = document.createElement('img');
     const elementSpan = document.createElement('span');
+    const elementHour = document.createElement('span');
     const spanText = document.createTextNode(serieName);
+    elementHour.innerHTML = serieHour;
     elementDiv.classList.add('serie-content');
     elementImg.classList.add('serie-img');
     elementSpan.classList.add('serie-text');
@@ -56,14 +64,13 @@ const paintSeries = (dataSearch) => {
     elementSpan.appendChild(spanText);
     elementDiv.appendChild(elementImg);
     elementDiv.appendChild(elementSpan);
+    elementDiv.appendChild(elementHour);
     elementContainer.appendChild(elementDiv);    
     
     //Al pinchar sobre el div que contiene la imagen y el nombre de la serie, tenemos que añadir esta a favoritos.
     elementDiv.addEventListener('click', clickFavourite);
   };
 };
-
-
 
 //Función para añadir o quitar el fondo de la serie cuando hago click en el div
 function clickFavourite (event) {
@@ -120,7 +127,14 @@ const addNewFavourite = () =>{
   };
 }; 
 
+const getLog = () => {
+  for(let i=0; i< series.length; i++){
+    console.log(series[i].show.name);
+  }
+  
+}
   
 //Ejecuto mi listener sobre el elemento, en este caso el botón para que genere la función de conectarse a la Api.
 elementButton.addEventListener('click', connectToApi);
+elementButtonLog.addEventListener('click', getLog);
 //# sourceMappingURL=main.js.map
